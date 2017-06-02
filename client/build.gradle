@@ -32,7 +32,7 @@ dependencies {
     // http://qiita.com/opengl-8080/items/671ffd4bf84fe5e32557
     //compileOnly files('lombok-1.16.16.jar')
     //provided files('lombok-1.16.16.jar')
-    provided    "org.projectlombok:lombok:1.16.16"
+    //provided    "org.projectlombok:lombok:1.16.16"
     compileOnly "org.projectlombok:lombok:1.16.16"
 
     // The production code uses the SLF4J logging API at compile time
