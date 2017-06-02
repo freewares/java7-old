@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>java7-lib1</name>
-	<comment>Project lib1 created by Buildship.</comment>
+	<name>server</name>
+	<comment>Project server created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

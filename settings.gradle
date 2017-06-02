@@ -1,1 +1,2 @@
-include 'java7-lib1'
+include 'client'
+include 'server'
