@@ -1,0 +1,68 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'Client'
+//version = '1.0'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    maven {
+        url "http://maven-eclipse.github.io/maven"
+    }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile project(':client')
+    // https://projectlombok.org/
+    // http://qiita.com/opengl-8080/items/671ffd4bf84fe5e32557
+    //provided files('lombok-1.16.16.jar')
+    //compileOnly files('lombok-1.16.16.jar')
+    //provided    "org.projectlombok:lombok:1.16.16"
+    compileOnly "org.projectlombok:lombok:1.16.16"
+
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
+
+    testCompile 'junit:junit:4.12'
+
+    // https://mvnrepository.com/artifact/org.mozilla/rhino
+    compile group: 'org.mozilla', name: 'rhino', version: '1.7.7.1'
+
+    // https://github.com/maven-eclipse/maven-eclipse.github.io
+    compile group: 'org.eclipse.swt', name: 'org.eclipse.swt.win32.win32.x86', version: '4.6.1'
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+
+task fatjar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Version': version,
+        	'Main-Class': mainClassName
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+[fatjar]*.group = 'custom'
